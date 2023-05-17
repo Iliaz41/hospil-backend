@@ -8,6 +8,7 @@ using Hospital.Models;
 using Hospital.Repository.IRepository;
 using Hospital.Services;
 using Hospital.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital.Controllers
@@ -25,6 +26,8 @@ namespace Hospital.Controllers
             _patientService = patientService;
             _mapper = mapper;
         }
+        
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -38,7 +41,8 @@ namespace Hospital.Controllers
             }
             return Ok(patientsDto);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}/Cards")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -51,7 +55,8 @@ namespace Hospital.Controllers
             }
             return Ok(cardDtos);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}/Appointments")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -64,7 +69,8 @@ namespace Hospital.Controllers
             }
             return Ok(appointmentDtos);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}/HealthStatuses")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -77,7 +83,8 @@ namespace Hospital.Controllers
             }
             return Ok(statusDtos);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}/Employee")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -90,7 +97,8 @@ namespace Hospital.Controllers
             }
             return Ok(employeeDto);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}/Employees")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -103,7 +111,8 @@ namespace Hospital.Controllers
             }
             return Ok(employeeDtos);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("PatientByName")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -117,7 +126,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("PatientBySurame")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -131,7 +141,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("PatientByPassport")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -145,7 +156,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("PatientByBirthday")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -159,7 +171,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("PatientByRoom")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -173,7 +186,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -187,7 +201,8 @@ namespace Hospital.Controllers
             }
             return Ok(patientDto);
         }
-
+        
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -202,7 +217,8 @@ namespace Hospital.Controllers
             await _patientRepository.Create(patient);
             return CreatedAtAction("GetById", new { id = patient.Id }, patient);
         }
-
+        
+        [Authorize]
         [HttpPut("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -217,7 +233,8 @@ namespace Hospital.Controllers
             await _patientRepository.Update(patient);
             return NoContent();
         }
-
+        
+        [Authorize]
         [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

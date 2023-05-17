@@ -7,6 +7,7 @@ using Hospital.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hospital.Controllers
 {
@@ -23,6 +24,8 @@ namespace Hospital.Controllers
             _mapper = mapper;
             _patientRepository = patientRepository;
         }
+        
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -52,7 +55,8 @@ namespace Hospital.Controllers
             }
             return Ok(statusesDto);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -77,7 +81,8 @@ namespace Hospital.Controllers
             statusDto.Patient = patient;
             return Ok(statusDto);
         }
-
+        
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -87,7 +92,8 @@ namespace Hospital.Controllers
             await _healthStatusRepository.Create(status);
             return CreatedAtAction("GetById", new { id = status.Id }, status);
         }
-
+        
+        [Authorize]
         [HttpPut("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -102,7 +108,8 @@ namespace Hospital.Controllers
             await _healthStatusRepository.Update(status);
             return NoContent();
         }
-
+        
+        [Authorize]
         [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
