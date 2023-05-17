@@ -1,6 +1,7 @@
 ﻿using Hospital.Dtos.Employee_dto;
 using Hospital.Services;
 using Hospital.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital.Controllers
@@ -14,7 +15,8 @@ namespace Hospital.Controllers
         {
             _docxService = docxService;
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> GetDocx(long id)

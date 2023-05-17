@@ -4,6 +4,7 @@ using Hospital.Dtos.Card_dto;
 using Hospital.Models;
 using Hospital.Repository;
 using Hospital.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital.Controllers
@@ -23,6 +24,7 @@ namespace Hospital.Controllers
             _employeeRepository = employeeRepository;
             _patientRepository = patientRepository;
         }
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -51,7 +53,8 @@ namespace Hospital.Controllers
             }
             return Ok(appointmentsDto);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -75,7 +78,8 @@ namespace Hospital.Controllers
             appointmentDto.Patient = patient;
             return Ok(appointmentDto);
         }
-
+        
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -85,7 +89,8 @@ namespace Hospital.Controllers
             await _appointmentRepository.Create(appointment);
             return CreatedAtAction("GetById", new { id = appointment.Id }, appointment);
         }
-
+        
+        [Authorize]
         [HttpPut("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -100,7 +105,8 @@ namespace Hospital.Controllers
             await _appointmentRepository.Update(appointment);
             return NoContent();
         }
-
+        
+        [Authorize]
         [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

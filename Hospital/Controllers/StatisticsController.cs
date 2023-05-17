@@ -1,6 +1,7 @@
 ﻿using Hospital.Dtos.Employee_dto;
 using Hospital.Dtos.Statistics_dto;
 using Hospital.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital.Controllers
@@ -14,6 +15,8 @@ namespace Hospital.Controllers
         {
             _statisticsService = statisticsService;
         }
+        
+        [Authorize]
         [HttpGet("PatientsStatistics/{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -26,7 +29,8 @@ namespace Hospital.Controllers
             }
             return Ok(stat);
         }
-
+        
+        [Authorize]
         [HttpGet("EmployeesStatistics/{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -39,7 +43,8 @@ namespace Hospital.Controllers
             }
             return Ok(stat);
         }
-
+        
+        [Authorize]
         [HttpGet("HospitalsStatistics")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]

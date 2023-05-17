@@ -32,7 +32,8 @@ namespace Hospital.Controllers
             _employeeService = employeeService;
             _minioService = minioService;
         }
-
+        
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -59,7 +60,8 @@ namespace Hospital.Controllers
             }
             return Ok(employee);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}/Patients")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -72,7 +74,8 @@ namespace Hospital.Controllers
             }
             return Ok(patients);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}/Cards")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -85,7 +88,8 @@ namespace Hospital.Controllers
             }
             return Ok(cards);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}/Appointments")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -98,7 +102,8 @@ namespace Hospital.Controllers
             }
             return Ok(appontments);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:long}/Kpi")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -111,7 +116,8 @@ namespace Hospital.Controllers
             }
             return Ok(salary);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("EmployeeByLoginTime")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -125,7 +131,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("EmployeeByKpi")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -139,7 +146,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("EmployeeBySurname")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -153,7 +161,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("EmployeeByName")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -167,7 +176,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("EmployeeByEmail")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -181,7 +191,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpGet]
         [Route("EmployeeByPassport")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -195,7 +206,8 @@ namespace Hospital.Controllers
             }
             return Ok(items);
         }
-
+        
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -205,7 +217,8 @@ namespace Hospital.Controllers
             await _employeeService.Create(dto);
             return CreatedAtAction("GetById", new { id = dto.Id }, dto);
         }
-
+        
+        [Authorize]
         [HttpPut("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -220,7 +233,8 @@ namespace Hospital.Controllers
             await _employeeService.Update(employeeDto);
             return NoContent();
         }
-
+        
+        [Authorize]
         [HttpDelete("{id:long}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -230,7 +244,8 @@ namespace Hospital.Controllers
             await _employeeService.Delete(id);
             return NoContent();
         }
-
+        
+        [Authorize]
         [HttpPost]
         [Route("UploadFile")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
